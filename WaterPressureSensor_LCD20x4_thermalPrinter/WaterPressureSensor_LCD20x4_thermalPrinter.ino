@@ -13,10 +13,10 @@ void setup()
 
   int val1 = EEPROM.read(MSB);
   int val2 = EEPROM.read(LSB);
-  setpoint = (float)((val1 * 225) + val2) / 100.00;
-  //  Serial.println(val1);
-  //  Serial.println(val2);
-  //  Serial.println(setpoint);
+  setpoint = ((val1 * 255) + val2) / 100.0;
+  Serial.println(val1);
+  Serial.println(val2);
+  Serial.println(setpoint);
   delay(1000);
   lcd.begin();
   lcd.backlight();
@@ -54,7 +54,7 @@ void loop()
   bool led = 0;
   raw_sensor = analogRead(A0);
   val_sensor = m_ * raw_sensor - c_;
-  val_kgpcm2 = val_sensor * 10.1972;
+  val_kgpcm2 = abs(val_sensor * 10.1972);
   currentMillis = millis();
   if (val_sensor >= setpoint)
     led = 1;
@@ -79,8 +79,8 @@ void loop()
     }
   }
 
-  if (!digitalRead(PB2))
-  {
+//  if (!digitalRead(PB2))
+//  {
     buttonMillis = millis();
     while (!digitalRead(PB2))
     {
@@ -107,7 +107,7 @@ void loop()
               if (currentMillis - previousMillis >= interval)
               {
                 previousMillis = currentMillis;
-
+                Serial.println(setpoint);
                 int val1 = (int)(setpoint * 100) / 255;
                 int val2 = (int)(setpoint * 100) % 255;
 

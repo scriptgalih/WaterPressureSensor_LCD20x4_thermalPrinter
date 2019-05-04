@@ -43,6 +43,6 @@ const long interval = 1000;
 
 unsigned long buttonMillis;
 
-float setpoint=0;
+double setpoint=0;
 int raw_sensor;
 float val_sensor;

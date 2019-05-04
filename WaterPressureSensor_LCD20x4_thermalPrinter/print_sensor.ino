@@ -1,5 +1,5 @@
 void print_sensor() {
-  Serial.println();
+  //  Serial.println();
   DateTime now = rtc.now();
 
   jam = now.hour();
@@ -14,11 +14,16 @@ void print_sensor() {
 
   if (val_sensor <= 0)
     val_sensor = 0;
+
+
   lcd.setCursor(0, 2);
   lcd.print("Pressure:");
   lcd.print(val_kgpcm2);
   lcd.print("Kg/cm2 ");
-
+  lcd.setCursor(0, 0);
+  lcd.print("FUEL PRESSURE GAUGE");
+  lcd.setCursor(0, 1);
+  lcd.print("DAIHATSU PAJAJARAN");
 
   lcd.setCursor(0, 3);
   if (jam >= 0 && jam < 10)
@@ -98,16 +103,16 @@ void print_1() {
   printer.boldOff();
   printer.justify('L');
   printer.print(F("Fuel Pressure : "));
-  printer.print(val_sensor*10.1972);
+  printer.print(val_sensor * 10.1972);
   printer.println(F("Kg/cm2"));
   printer.println();
   printer.justify('C');
-  
+
   if (val_sensor <= setpoint)
     printer.println(F("Pressure OK"));
   else {
     printer.inverseOn();
-//    printer.println(F("        Replace Filter        "));
+    //    printer.println(F("        Replace Filter        "));
     printer.println(F("Replace Fuel Pump <3,3Kg/cm2"));
     printer.inverseOff();
   }
@@ -133,7 +138,7 @@ void print2digits(int number) {
 void printSetDensity() {
   lcd.setCursor(0, 1);
   lcd.print("Limit Value:");
-  lcd.print(setpoint+0.1);
+  lcd.print(setpoint + 0.1);
   lcd.print("   ");
 }
 
