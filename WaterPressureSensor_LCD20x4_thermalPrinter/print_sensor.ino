@@ -108,7 +108,7 @@ void print_1() {
   printer.println();
   printer.justify('C');
 
-  if (val_sensor <= setpoint)
+  if (val_sensor >= setpoint)
     printer.println(F("Pressure OK"));
   else {
     printer.inverseOn();

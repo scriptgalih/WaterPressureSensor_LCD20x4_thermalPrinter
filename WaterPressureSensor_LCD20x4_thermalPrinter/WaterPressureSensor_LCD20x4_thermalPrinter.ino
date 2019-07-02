@@ -13,6 +13,7 @@ void setup()
 
   int val1 = EEPROM.read(MSB);
   int val2 = EEPROM.read(LSB);
+//  setpoint = ((val1 * 255) + val2) / 100.0;
   setpoint = ((val1 * 255) + val2) / 100.0;
   Serial.println(val1);
   Serial.println(val2);
@@ -79,8 +80,8 @@ void loop()
     }
   }
 
-//  if (!digitalRead(PB2))
-//  {
+  if (!digitalRead(PB2))
+  {
     buttonMillis = millis();
     while (!digitalRead(PB2))
     {
